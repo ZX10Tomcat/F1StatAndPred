@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  f1statandpred:
+    image: f1statandpred
+    build:
+      context: ./F1StatAndPred
+      dockerfile: Dockerfile
