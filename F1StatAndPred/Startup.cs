@@ -28,6 +28,20 @@ namespace F1StatAndPred
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                //options.AddPolicy("AllowSpecificOrigins",
+                //builder =>
+                //{
+                //    builder.WithOrigins("http://localhost");
+                //});
+
+                options.AddPolicy("AllowAllOrigins",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin();
+                    });
+            });
             // Add framework services.
             services.AddMvc();
         }
@@ -37,6 +51,9 @@ namespace F1StatAndPred
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            app.UseCors(builder =>
+                builder.WithOrigins("*"));
 
             app.UseMvc();
         }
